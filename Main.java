@@ -8,15 +8,35 @@ class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Principal: ");
-        Integer principal = scanner.nextInt();
+        Integer principal = 0;
+        while (true) {
+            System.out.print("Principal ($1k - $1M): ");
+            principal = scanner.nextInt();
+            if (principal < 1_000_000 && principal > 1000)
+                break;
+            System.out.println("Please enter a number between 1k and 1M");
+        }
 
-        System.out.print("Annual Interest Rate: ");
-        float annualInterest = scanner.nextFloat();
+        float annualInterest = 0;
+        while (true) {
+            System.out.print("Annual Interest Rate: ");
+            annualInterest = scanner.nextFloat();
+            if (annualInterest > 0 && annualInterest <= 30)
+                break;
+            System.out.println("Please enter a number between 0 and 30");
+        }
+
         float monthlyInterest = annualInterest / MONTHS_IN_YEAR / PERCENT;
 
-        System.out.print("Period (Years): ");
-        byte years = scanner.nextByte();
+        byte years = 1;
+        while (true) {
+            System.out.print("Period (years): ");
+            years = scanner.nextByte();
+            if (years > 0 && years <= 30)
+                break;
+            System.out.println("Please enter a whole number between 0 and 30");
+        }
+
         int numberOfPayments = years * MONTHS_IN_YEAR;
 
         Double monthlyPay = principal
